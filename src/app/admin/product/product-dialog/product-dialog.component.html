@@ -1,0 +1,44 @@
+<div>
+  <div>
+    <h2 mat-dialog-title>Product Dialog
+      <!--<span class="spacer"></span>-->
+      <button mat-dialog-close style="float: right;" mat-mini-fab type="button"><mat-icon>close</mat-icon></button>
+    </h2>
+  </div>
+
+  <form [formGroup]="productForm" (ngSubmit)="SaveProduct()">
+    <mat-dialog-content>
+      <mat-form-field>
+        <mat-select formControlName="brand_id" placeholder="Select Brand">
+          <mat-option [value]="brand.brand_id" *ngFor="let brand of brandData">{{brand.brand_name}}</mat-option>
+        </mat-select>
+        <!--<input matInput formControlName="category_id" placeholder="Category">-->
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select formControlName="category_id" placeholder="Select Category">
+          <mat-option [value]="category.category_id" *ngFor="let category of categoryData">{{category.category_name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="product_name" placeholder="Product Name">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="product_description" placeholder="Product Description">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="product_qty" type="number" placeholder="Product Quantity">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="product_price" placeholder="Product Price">
+      </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+      <button type="submit" mat-stroked-button color="primary" [disabled]="!productForm.valid">Save</button>
+      <button type="button" mat-stroked-button color="accent" (click)="clearAll()">Clear</button>
+    </mat-dialog-actions>
+  </form>
+
+</div>

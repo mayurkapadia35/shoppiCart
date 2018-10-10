@@ -1,0 +1,53 @@
+<mat-grid-list cols="6" rowHeight="fit">
+  <mat-toolbar color="primary">
+    <mat-grid-tile-header>
+      <mat-grid-tile>
+        <a routerLink="" mat-button>
+          <mat-icon>shopping_cart</mat-icon>
+          ShoppiCart</a>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="2">
+        <mat-form-field style="width: 100%">
+          <input matInput placeholder="Search the Item">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile></mat-grid-tile>
+
+      <mat-grid-tile *ngIf="true">
+        <button type="button" mat-button (click)="openDialog()">SignIn/SignUp</button>
+      </mat-grid-tile>
+
+      <!--Start the code for menu trigger-->
+      <mat-grid-tile *ngIf="false">
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            Profile
+          </button>
+          <button mat-menu-item>
+            <mat-icon>shopping_basket</mat-icon>
+            Orders
+          </button>
+          <button mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            Logout
+          </button>
+        </mat-menu>
+
+        <button mat-icon-button [matMenuTriggerFor]="appMenu" (mouseover)="openMenu()">
+          Admin
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+      </mat-grid-tile>
+
+      <!--EOL for Menu trigger code -->
+
+      <mat-grid-tile>
+        <a mat-button routerLink="">
+          <mat-icon>shopping_cart</mat-icon>
+          Cart</a>
+      </mat-grid-tile>
+    </mat-grid-tile-header>
+  </mat-toolbar>
+</mat-grid-list>

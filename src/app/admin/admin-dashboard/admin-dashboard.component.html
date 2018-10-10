@@ -1,0 +1,18 @@
+<div class="grid-container">
+  <mat-grid-list cols="4" rowHeight="140px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card>
+        <mat-card-header>
+          <span>{{card.desc}}</span>
+          <mat-card-title>
+            <mat-icon>{{card.icons}}</mat-icon>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-actions>
+          <button mat-button routerLink="{{card.link}}">Show More Details</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
