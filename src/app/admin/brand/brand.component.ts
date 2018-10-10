@@ -1,5 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatPaginator, MatSnackBar, MatSort, MatTableDataSource, PageEvent} from '@angular/material';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatPaginator,
+  MatSnackBar,
+  MatSort,
+  MatTableDataSource,
+  PageEvent, Sort
+} from '@angular/material';
 import {BranddialogComponent} from './branddialog/branddialog.component';
 import {BrandService} from '../../Services/brand.service';
 
@@ -19,7 +27,7 @@ export class BrandComponent implements OnInit {
   public len = 0;
   public pageIndex = 0;
   public pageSize = 5;
-  public brand_id = 0;
+  public id = 0;
   public brandData;
   public singleRecord: any[];
   @ViewChild(MatSort) sort: MatSort;
@@ -45,23 +53,29 @@ export class BrandComponent implements OnInit {
       );
   }
 
-  deleteBlog(id: number) {
-    console.log(id);
-    // this.brandService.deleteBrand(id)
-    //   .subscribe(
-    //     (data: any) => {
-    //       if (data.Status) {
-    //         this.snackBar.open(data.Status, 'close', {
-    //           duration: 2000
-    //         });
-    //         this.ngOnInit();
-    //       }
-    //     }
-    //   );
+  sortData(event: Sort) {
+    console.log(event.direction);
+    console.log(event.active);
   }
 
-  editBlog(brand_id: number) {
-    this.brand_id = brand_id;
+  deleteBlog(id: number) {
+    this.brandService.deleteBrand(id)
+      .subscribe(
+        (data: any) => {
+          if (data.Status) {
+            this.snackBar.open(data.Status, 'close', {
+              duration: 2000
+            });
+          }
+        }
+      );
+    setTimeout(() => {
+      this.fetchData(this.pageIndex, this.pageSize);
+    }, 500);
+  }
+
+  editBlog(id: number) {
+    this.id = id;
     this.openDialog();
   }
 
@@ -78,8 +92,8 @@ export class BrandComponent implements OnInit {
     dialogConfig.autoFocus = false;
     dialogConfig.width = '500px';
 
-    if (this.brand_id > 0) {
-      const index = this.brandData.findIndex(item => item.brand_id === this.brand_id);
+    if (this.id > 0) {
+      const index = this.brandData.findIndex(item => item.id === this.id);
       this.singleRecord = this.brandData[index];
 
       dialogConfig.data = {
@@ -96,15 +110,14 @@ export class BrandComponent implements OnInit {
     brandDialogRef.afterClosed()
       .subscribe(
         (result: any) => {
-          if (result.Success) {
-            this.snackBar.open(result.Success, 'Close', {
-              duration: 1500
+          if (result.Status) {
+            this.snackBar.open(result.Status, 'Close', {
+              duration: 3000
             });
 
-            if (result.Success === 'Added Successfully') {
-              this.len += 1;
+            if (result.Status === 'Added Successfully') {
               this.fetchData(this.pageIndex, this.pageSize);
-            } else if (result.Success === 'Edited Successfully') {
+            } else if (result.Status === 'Updated succesfully') {
               this.fetchData(this.pageIndex, this.pageSize);
             }
           } else {
@@ -115,7 +128,7 @@ export class BrandComponent implements OnInit {
           console.log(error);
         }
       );
-    this.brand_id = 0;
+    this.id = 0;
   }
 
 }

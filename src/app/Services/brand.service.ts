@@ -9,8 +9,15 @@ export class BrandService {
               private authService: AuthenticationService) {}
 
   public brandData;
+
   addBrand(brandData) {
-    return this.http.post('http://localhost:3000/api/brand/addBrand', brandData)
+    const header = this.authService.getToken();
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': header
+      })
+    };
+    return this.http.post('http://192.168.200.153:4040/api/brand/', brandData, headers)
       .pipe(
         map(
           (response: Response) => {
@@ -20,8 +27,14 @@ export class BrandService {
       );
   }
 
-  editBrand(brandData, brand_id: number) {
-    return this.http.post('http://localhost:3000/api/brand/editBrand/' + brand_id, brandData)
+  editBrand(brandData, id: number) {
+    const header = this.authService.getToken();
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': header
+      })
+    };
+    return this.http.put('http://192.168.200.153:4040/api/brand/' + id, brandData, headers)
       .pipe(
         map(
           (response: Response) => {
@@ -36,7 +49,13 @@ export class BrandService {
   }
 
   deleteBrand(id: number) {
-    return this.http.delete('http://localhost:3000/api/brand/deleteBrandById/' + id);
+    const header = this.authService.getToken();
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': header
+      })
+    };
+    return this.http.delete('http://192.168.200.153:4040/api/brand/' + id, headers);
   }
 
 

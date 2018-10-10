@@ -9,8 +9,8 @@ import {
   MatInputModule,
   MatMenuModule,
   MatPaginatorModule, MatSelectModule,
-  MatSnackBarModule,
-  MatTableModule
+  MatSnackBarModule, MatSortModule,
+  MatTableModule, MatTooltipModule
 } from '@angular/material';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -30,7 +30,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSnackBarModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    MatTooltipModule
   ],
   exports: [
     MatButtonModule,
@@ -46,7 +48,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSnackBarModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule,
+    MatTooltipModule
   ]
 })
 export class NgMaterialModule {

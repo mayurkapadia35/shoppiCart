@@ -4,12 +4,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgMaterialModule} from './ngMaterial.module';
 import { AdminComponent } from './admin/admin.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule,
+import {
+  MatToolbarModule, MatButtonModule, MatSidenavModule,
   MatIconModule,
   MatListModule,
   MatGridListModule,
   MatCardModule,
-  MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule
+  MatMenuModule, MatTableModule, MatSortModule, MatPaginatorModule
 } from '@angular/material';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import {AdminAuthGuard} from './auth-guard/adminAuth.guard';
