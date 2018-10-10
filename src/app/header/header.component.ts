@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialogConfig, MatDialog, MatMenuTrigger} from '@angular/material';
+import {MatDialogConfig, MatDialog, MatMenuTrigger, MatSnackBar} from '@angular/material';
 import {SigninUpComponent} from '../signin-up/signin-up.component';
 
 @Component({
@@ -9,7 +9,10 @@ import {SigninUpComponent} from '../signin-up/signin-up.component';
 })
 export class HeaderComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  constructor(public dialog: MatDialog) { }
+
+  constructor(public dialog: MatDialog,
+              private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
   }
@@ -20,15 +23,21 @@ export class HeaderComponent implements OnInit {
     dialogConfig.autoFocus = false;
     dialogConfig.width = '500px';
     dialogConfig.data = {
-      status: 'hello'
+      status: 'data'
     };
 
     const loginDialogRef = this.dialog.open(SigninUpComponent, dialogConfig);
 
     loginDialogRef.afterClosed()
       .subscribe(
-        (result) => {
-          console.log(`${result}`);
+        (result: any) => {
+          if (Object.keys(result).length === 1) {
+            this.snackBar.open('Registered Successfully', 'close', {
+              duration: 3000
+            });
+          } else {
+            console.log(`${result}`);
+          }
         },
         (error) => console.log(error)
       );

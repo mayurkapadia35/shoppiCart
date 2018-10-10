@@ -14,7 +14,7 @@ export class BrandComponent implements OnInit {
               private brandService: BrandService) {
   }
 
-  public displayedColumns: string[] = ['brand_id', 'brand_name', 'brand_description', 'actions'];
+  public displayedColumns: string[] = ['brand_name', 'actions'];
   public dataSource;
   public len = 0;
   public pageIndex = 0;
@@ -26,12 +26,6 @@ export class BrandComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.brandService.getTotalBrand()
-      .subscribe(
-        (data) => {
-          this.len = data[0].totalLength;
-        }
-      );
     this.fetchData(this.pageIndex, this.pageSize);
   }
 
@@ -40,8 +34,9 @@ export class BrandComponent implements OnInit {
     this.brandService.getBrandPageWise(pageIndex, size)
       .subscribe(
         (data: any) => {
-          this.brandData = data;
-          this.dataSource = new MatTableDataSource(data);
+          this.len = data['count'];
+          this.brandData = data['rows'];
+          this.dataSource = new MatTableDataSource(data['rows']);
           this.dataSource.sort = this.sort;
         },
         (error) => {
@@ -50,19 +45,19 @@ export class BrandComponent implements OnInit {
       );
   }
 
-  deleteBlog(brand_id: number) {
-
-    this.brandService.deleteBrand(brand_id)
-      .subscribe(
-        (data: any) => {
-          if (data.Status) {
-            this.snackBar.open(data.Status, 'close', {
-              duration: 2000
-            });
-            this.ngOnInit();
-          }
-        }
-      );
+  deleteBlog(id: number) {
+    console.log(id);
+    // this.brandService.deleteBrand(id)
+    //   .subscribe(
+    //     (data: any) => {
+    //       if (data.Status) {
+    //         this.snackBar.open(data.Status, 'close', {
+    //           duration: 2000
+    //         });
+    //         this.ngOnInit();
+    //       }
+    //     }
+    //   );
   }
 
   editBlog(brand_id: number) {

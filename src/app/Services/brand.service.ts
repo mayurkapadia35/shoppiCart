@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {AuthenticationService} from '../auth-guard/authentication-service';
 
 @Injectable()
 export class BrandService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private authService: AuthenticationService) {}
 
   public brandData;
   addBrand(brandData) {
@@ -43,11 +45,16 @@ export class BrandService {
   }
 
   getBrandPageWise(pageIndex: number, pageSize: number) {
-    return this.http.get('http://localhost:3000/api/brand/getBrandPageWise/' + pageIndex + '/' + pageSize)
+    const header = this.authService.getToken();
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': header
+      })
+    };
+    return this.http.get('http://192.168.200.153:4040/api/brand/' + pageIndex + '/' + pageSize, headers)
       .pipe(
         map(
           (response: Response) => {
-            this.brandData = response;
             return response;
           }
         )

@@ -4,7 +4,7 @@
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-dialog-content>
         <mat-form-field style="width: 100%;">
-          <input matInput formControlName="username" placeholder="Username"/>
+          <input matInput formControlName="email" placeholder="Email"/>
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
@@ -24,7 +24,7 @@
     <form [formGroup]="registerForm" (ngSubmit)="register()">
       <mat-dialog-content>
         <mat-form-field style="width: 100%;">
-          <input matInput formControlName="email" placeholder="Email/Username"/>
+          <input matInput formControlName="email" placeholder="Email"/>
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
@@ -33,7 +33,7 @@
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
-          <input matInput formControlName="contactno" placeholder="Contact No"/>
+          <input matInput formControlName="phone_no" placeholder="Contact No"/>
         </mat-form-field>
 
       </mat-dialog-content>

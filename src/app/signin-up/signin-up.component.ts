@@ -14,7 +14,9 @@ export class SigninUpComponent implements OnInit {
   constructor(public thisDialogRef: MatDialogRef<SigninUpComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public authService: AuthenticationService,
-              private router: Router) { }
+              private router: Router) {
+  }
+
   loginForm: FormGroup;
   registerForm: FormGroup;
   public loginFlag = true;
@@ -26,28 +28,32 @@ export class SigninUpComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      username: new FormControl(null, Validators.required),
+      email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
     });
 
     this.registerForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
-      contactno: new FormControl(null, [Validators.required, Validators.maxLength(5)])
+      phone_no: new FormControl(null, [Validators.required, Validators.maxLength(10)])
     });
   }
 
   login() {
     const data = {
-      username: this.loginForm.get('username').value,
+      email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value
     };
 
     this.authService.login(data)
       .subscribe(
         (result) => {
-          this.response = result;
-          this.router.navigate(['/admin']);
+          if (Object.keys(result).length === 2) {
+            if (result['user'].role_name === 'Admin') {
+              this.response = result;
+              this.router.navigate(['/admin']);
+            }
+          }
         },
         (error) => {
           console.log(error);
@@ -57,7 +63,21 @@ export class SigninUpComponent implements OnInit {
   }
 
   register() {
-    this.thisDialogRef.close(this.registerForm.value);
+    const data = {
+      email: this.registerForm.get('email').value,
+      password: this.registerForm.get('password').value,
+      phone_no: this.registerForm.get('phone_no').value
+    };
+
+    this.authService.register(data)
+      .subscribe(
+        (result) => {
+          this.thisDialogRef.close(result);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   enableRegister() {

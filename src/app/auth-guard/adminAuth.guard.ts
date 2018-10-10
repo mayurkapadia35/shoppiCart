@@ -13,11 +13,8 @@ export class AdminAuthGuard implements CanActivate {
   userData: any;
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
-      const base64url = token.split('.')[1];
-      const base64 = base64url.replace('-', '+').replace('_', '/');
-      this.userData = JSON.parse(atob(base64));
+    if (localStorage.getItem('token') && localStorage.getItem('user')) {
+      this.userData = JSON.parse(localStorage.getItem('user'));
       if (this.userData.role_name === 'Admin') {
         return true;
       } else {
