@@ -24,7 +24,6 @@ export class ProductDialogComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.categoryData = result;
-          console.log(this.categoryData);
         },
         (error) => {
           console.log(error);
@@ -35,7 +34,6 @@ export class ProductDialogComponent implements OnInit {
       .subscribe(
         (result: any) => {
           this.brandData = result.data;
-          console.log(this.brandData);
         },
         (error) => {
           console.log(error);

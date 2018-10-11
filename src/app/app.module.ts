@@ -9,11 +9,12 @@ import { FooterComponent } from './footer/footer.component';
 import { SigninUpComponent } from './signin-up/signin-up.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AuthenticationService} from './auth-guard/authentication-service';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BranddialogComponent} from './admin/brand/branddialog/branddialog.component';
 import {BrandService} from './Services/brand.service';
 import {CategoryService} from './Services/category.service';
 import { ProductDialogComponent } from './admin/product/product-dialog/product-dialog.component';
+import {AuthInterceptor} from './auth-guard/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,11 @@ import { ProductDialogComponent } from './admin/product/product-dialog/product-d
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, BrandService, CategoryService],
+  providers: [AuthenticationService, BrandService, CategoryService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   entryComponents: [SigninUpComponent, BranddialogComponent, ProductDialogComponent],
   bootstrap: [AppComponent]
 })

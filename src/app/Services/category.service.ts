@@ -6,6 +6,10 @@ export class CategoryService {
   constructor(private http: HttpClient) {}
 
   getAllCategory() {
-    return this.http.get('http://localhost:3000/api/category/getAllCategory');
+    return this.http.get('http://192.168.200.153:4040/api/category');
+  }
+
+  getDataPageWise(index: number, size: number) {
+    return this.http.get('http://192.168.200.153:4040/api/category/' + index + '/' + size);
   }
 }

@@ -10,13 +10,13 @@
     <mat-dialog-content>
       <mat-form-field>
         <mat-select formControlName="brand_id" placeholder="Select Brand">
-          <mat-option [value]="brand.brand_id" *ngFor="let brand of brandData">{{brand.brand_name}}</mat-option>
+          <mat-option [value]="brand.id" *ngFor="let brand of brandData">{{brand.brand_name}}</mat-option>
         </mat-select>
         <!--<input matInput formControlName="category_id" placeholder="Category">-->
       </mat-form-field>
       <mat-form-field>
         <mat-select formControlName="category_id" placeholder="Select Category">
-          <mat-option [value]="category.category_id" *ngFor="let category of categoryData">{{category.category_name}}</mat-option>
+          <mat-option [value]="category.id" *ngFor="let category of categoryData">{{category.category_name}}</mat-option>
         </mat-select>
       </mat-form-field>
 

@@ -2,12 +2,6 @@
 
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 data-table">
 
-    <!-- Category_id Column -->
-    <ng-container matColumnDef="category_id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Id. </th>
-      <td mat-cell *matCellDef="let element"> {{element.category_id}} </td>
-    </ng-container>
-
     <!-- Category_name Column -->
     <ng-container matColumnDef="category_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -17,5 +11,5 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="6" [pageSize]="5" [pageIndex]="0"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="changeData($event)" [length]="len" [pageSize]="5" [pageIndex]="0"></mat-paginator>
 </div>

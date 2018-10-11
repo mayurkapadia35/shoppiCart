@@ -1,23 +1,13 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {AuthenticationService} from '../auth-guard/authentication-service';
 
 @Injectable()
 export class BrandService {
-  constructor(private http: HttpClient,
-              private authService: AuthenticationService) {}
-
-  public brandData;
+  constructor(private http: HttpClient) {}
 
   addBrand(brandData) {
-    const header = this.authService.getToken();
-    const headers = {
-      headers: new HttpHeaders({
-        'Authorization': header
-      })
-    };
-    return this.http.post('http://192.168.200.153:4040/api/brand/', brandData, headers)
+    return this.http.post('http://192.168.200.153:4040/api/brand/', brandData)
       .pipe(
         map(
           (response: Response) => {
@@ -28,13 +18,7 @@ export class BrandService {
   }
 
   editBrand(brandData, id: number) {
-    const header = this.authService.getToken();
-    const headers = {
-      headers: new HttpHeaders({
-        'Authorization': header
-      })
-    };
-    return this.http.put('http://192.168.200.153:4040/api/brand/' + id, brandData, headers)
+    return this.http.put('http://192.168.200.153:4040/api/brand/' + id, brandData)
       .pipe(
         map(
           (response: Response) => {
@@ -45,32 +29,15 @@ export class BrandService {
   }
 
   getAllBrand() {
-    return this.http.get('http://localhost:3000/api/brand/getAllBrand/');
+    return this.http.get('http://192.168.200.153:4040/api/brand/');
   }
 
   deleteBrand(id: number) {
-    const header = this.authService.getToken();
-    const headers = {
-      headers: new HttpHeaders({
-        'Authorization': header
-      })
-    };
-    return this.http.delete('http://192.168.200.153:4040/api/brand/' + id, headers);
-  }
-
-
-  getTotalBrand() {
-    return this.http.get('http://localhost:3000/api/brand/getTotalBrand');
+    return this.http.delete('http://192.168.200.153:4040/api/brand/' + id);
   }
 
   getBrandPageWise(pageIndex: number, pageSize: number) {
-    const header = this.authService.getToken();
-    const headers = {
-      headers: new HttpHeaders({
-        'Authorization': header
-      })
-    };
-    return this.http.get('http://192.168.200.153:4040/api/brand/' + pageIndex + '/' + pageSize, headers)
+    return this.http.get('http://192.168.200.153:4040/api/brand/' + pageIndex + '/' + pageSize)
       .pipe(
         map(
           (response: Response) => {

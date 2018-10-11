@@ -39,7 +39,9 @@ export class AuthenticationService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    if (localStorage.getItem('token')) {
+      return localStorage.getItem('token');
+    }
   }
 
   getUserRole_name() {

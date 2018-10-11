@@ -51,6 +51,7 @@ export class SigninUpComponent implements OnInit {
           if (Object.keys(result).length === 2) {
             if (result['user'].role_name === 'Admin') {
               this.response = result;
+              this.thisDialogRef.close(this.response);
               this.router.navigate(['/admin']);
             }
           }
@@ -59,7 +60,6 @@ export class SigninUpComponent implements OnInit {
           console.log(error);
         }
       );
-    this.thisDialogRef.close(this.response);
   }
 
   register() {

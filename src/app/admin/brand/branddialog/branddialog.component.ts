@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BrandService} from '../../../Services/brand.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-branddialog',

@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 import {BranddialogComponent} from './branddialog/branddialog.component';
 import {BrandService} from '../../Services/brand.service';
+import {AuthenticationService} from '../../auth-guard/authentication-service';
 
 @Component({
   selector: 'app-brand',
@@ -19,7 +20,8 @@ import {BrandService} from '../../Services/brand.service';
 export class BrandComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
-              private brandService: BrandService) {
+              private brandService: BrandService,
+              private authService: AuthenticationService) {
   }
 
   public displayedColumns: string[] = ['brand_name', 'actions'];
@@ -42,10 +44,18 @@ export class BrandComponent implements OnInit {
     this.brandService.getBrandPageWise(pageIndex, size)
       .subscribe(
         (data: any) => {
-          this.len = data['count'];
-          this.brandData = data['rows'];
-          this.dataSource = new MatTableDataSource(data['rows']);
-          this.dataSource.sort = this.sort;
+          // debugger;
+          // if (data.message) {
+          //   this.snackBar.open(data.message, 'close', {
+          //     duration: 3000
+          //   });
+          //   this.authService.logout();
+          // } else {
+            this.len = data['count'];
+            this.brandData = data['rows'];
+            this.dataSource = new MatTableDataSource(data['rows']);
+            this.dataSource.sort = this.sort;
+          // }
         },
         (error) => {
           console.log(error);
