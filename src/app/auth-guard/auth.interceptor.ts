@@ -13,7 +13,9 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const copiedReq = req.clone();
+
     if (copiedReq.url.indexOf('http://192.168.200.153:4040/api/auth/') === -1) {
+
       const header = this.authService.getToken();
       const copy = req.clone({headers: req.headers.set('Authorization', header)});
       return next.handle(copy)

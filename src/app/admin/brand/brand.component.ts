@@ -20,8 +20,7 @@ import {AuthenticationService} from '../../auth-guard/authentication-service';
 export class BrandComponent implements OnInit {
   constructor(private dialog: MatDialog,
               private snackBar: MatSnackBar,
-              private brandService: BrandService,
-              private authService: AuthenticationService) {
+              private brandService: BrandService) {
   }
 
   public displayedColumns: string[] = ['brand_name', 'actions'];

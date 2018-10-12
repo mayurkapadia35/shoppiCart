@@ -33,7 +33,7 @@ export class ProductDialogComponent implements OnInit {
     this.brandService.getAllBrand()
       .subscribe(
         (result: any) => {
-          this.brandData = result.data;
+          this.brandData = result;
         },
         (error) => {
           console.log(error);
