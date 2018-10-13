@@ -15,6 +15,7 @@ import {BrandService} from './Services/brand.service';
 import {CategoryService} from './Services/category.service';
 import { ProductDialogComponent } from './admin/product/product-dialog/product-dialog.component';
 import {AuthInterceptor} from './auth-guard/auth.interceptor';
+import {ProductService} from './Services/product.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {AuthInterceptor} from './auth-guard/auth.interceptor';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService, BrandService, CategoryService, {
+  providers: [AuthenticationService, ProductService, BrandService, CategoryService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

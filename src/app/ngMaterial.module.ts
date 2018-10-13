@@ -8,7 +8,7 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatPaginatorModule, MatSelectModule,
+  MatPaginatorModule, MatRadioModule, MatSelectModule,
   MatSnackBarModule, MatSortModule,
   MatTableModule, MatTooltipModule
 } from '@angular/material';
@@ -32,7 +32,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatSelectModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ],
   exports: [
     MatButtonModule,
@@ -50,7 +51,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatSelectModule,
     MatSortModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatRadioModule
   ]
 })
 export class NgMaterialModule {

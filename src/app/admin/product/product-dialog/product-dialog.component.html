@@ -2,7 +2,9 @@
   <div>
     <h2 mat-dialog-title>Product Dialog
       <!--<span class="spacer"></span>-->
-      <button mat-dialog-close style="float: right;" mat-mini-fab type="button"><mat-icon>close</mat-icon></button>
+      <button mat-dialog-close style="float: right;" mat-mini-fab type="button">
+        <mat-icon>close</mat-icon>
+      </button>
     </h2>
   </div>
 
@@ -16,7 +18,8 @@
       </mat-form-field>
       <mat-form-field>
         <mat-select formControlName="category_id" placeholder="Select Category">
-          <mat-option [value]="category.id" *ngFor="let category of categoryData">{{category.category_name}}</mat-option>
+          <mat-option [value]="category.id" *ngFor="let category of categoryData">{{category.category_name}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 

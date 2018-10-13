@@ -10,7 +10,6 @@ import {
 } from '@angular/material';
 import {BranddialogComponent} from './branddialog/branddialog.component';
 import {BrandService} from '../../Services/brand.service';
-import {AuthenticationService} from '../../auth-guard/authentication-service';
 
 @Component({
   selector: 'app-brand',
@@ -43,13 +42,6 @@ export class BrandComponent implements OnInit {
     this.brandService.getBrandPageWise(pageIndex, size)
       .subscribe(
         (data: any) => {
-          // debugger;
-          // if (data.message) {
-          //   this.snackBar.open(data.message, 'close', {
-          //     duration: 3000
-          //   });
-          //   this.authService.logout();
-          // } else {
             this.len = data['count'];
             this.brandData = data['rows'];
             this.dataSource = new MatTableDataSource(data['rows']);
@@ -67,7 +59,7 @@ export class BrandComponent implements OnInit {
     console.log(event.active);
   }
 
-  deleteBlog(id: number) {
+  deleteBrand(id: number) {
     this.brandService.deleteBrand(id)
       .subscribe(
         (data: any) => {
@@ -83,7 +75,7 @@ export class BrandComponent implements OnInit {
     }, 500);
   }
 
-  editBlog(id: number) {
+  editBrand(id: number) {
     this.id = id;
     this.openDialog();
   }
