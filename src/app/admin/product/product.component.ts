@@ -16,6 +16,9 @@ export class ProductComponent implements OnInit {
   public pageIndex = 0;
   public pageSize = 5;
   public len;
+  public id = 0;
+  public singleRecord: any[];
+  public productData;
   public pageDirective = 'reset';
   public pageActive = 'reset';
 
@@ -75,6 +78,7 @@ export class ProductComponent implements OnInit {
       .subscribe(
         (result) => {
           this.len = result['count'];
+          this.productData = result['rows'];
           this.dataSource = result['rows'];
         },
         (error) => {
@@ -84,21 +88,42 @@ export class ProductComponent implements OnInit {
 
   }
 
+  editProduct(id: number) {
+    this.id = id;
+    this.openDialog();
+  }
+
   openDialog() {
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '500px';
-    dialogConfig.data = {
-      status: 'Add'
-    };
+
+    if (this.id > 0) {
+      const index = this.productData.findIndex(item => item.id === this.id);
+      this.singleRecord = this.productData[index];
+      dialogConfig.data = {
+        data: this.singleRecord
+      };
+    } else {
+      dialogConfig.data = {
+        status: 'Add'
+      };
+    }
 
     const productDialogRef = this.dialog.open(ProductDialogComponent, dialogConfig);
 
     productDialogRef.afterClosed()
       .subscribe(
         (data) => {
-          console.log(data);
+          if (data.Status) {
+            this.snackBar.open(data.Status, 'Close', {
+              duration: 3000
+            });
+            this.fetchData(this.pageIndex, this.pageSize, this.pageDirective, this.pageActive);
+          }
+          this.id = 0;
         },
         (error) => {
           console.log(error);

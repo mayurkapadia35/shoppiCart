@@ -14,7 +14,6 @@
         <mat-select formControlName="brand_id" placeholder="Select Brand">
           <mat-option [value]="brand.id" *ngFor="let brand of brandData">{{brand.brand_name}}</mat-option>
         </mat-select>
-        <!--<input matInput formControlName="category_id" placeholder="Category">-->
       </mat-form-field>
       <mat-form-field>
         <mat-select formControlName="category_id" placeholder="Select Category">
@@ -36,6 +35,27 @@
       <mat-form-field>
         <input matInput formControlName="product_price" placeholder="Product Price">
       </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="isDeleted" placeholder="Select is Deleted">
+          <mat-option [value]="data.value" *ngFor="let data of isDeletedArray">{{data.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select formControlName="issoldout" placeholder="Select Sold Out Option">
+          <mat-option [value]="data.value" *ngFor="let data of isSoldOut">{{data.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div>
+        <input type="file" formControlName="product_images" id="profile" (change)="previewFile()"/>
+      </div>
+      <div>
+        <img src="" alt="" id="profileid" height="100px" width="100px">
+      </div>
+
+
     </mat-dialog-content>
 
     <mat-dialog-actions>

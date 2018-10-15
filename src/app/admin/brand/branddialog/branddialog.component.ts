@@ -58,8 +58,8 @@ export class BranddialogComponent implements OnInit {
             console.log(error);
           }
         );
-      this.id = 0;
     }
+    this.id = 0;
 
     setTimeout(() => {
       this.dialogRef.close(this.output);
