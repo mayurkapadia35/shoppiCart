@@ -1,6 +1,6 @@
 <div>
 
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8 data-table">
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" class="mat-elevation-z8 data-table">
 
     <!-- Category_name Column -->
     <ng-container matColumnDef="category_name">

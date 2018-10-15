@@ -36,8 +36,8 @@ export class BrandService {
     return this.http.delete('http://192.168.200.153:4040/api/brand/' + id);
   }
 
-  getBrandPageWise(pageIndex: number, pageSize: number) {
-    return this.http.get('http://192.168.200.153:4040/api/brand/' + pageIndex + '/' + pageSize)
+  getBrandPageWise(pageIndex: number, pageSize: number, direction: string, field: string) {
+    return this.http.get('http://192.168.200.153:4040/api/brand/' + pageIndex + '/' + pageSize + '/' + direction + '/' + field)
       .pipe(
         map(
           (response: Response) => {

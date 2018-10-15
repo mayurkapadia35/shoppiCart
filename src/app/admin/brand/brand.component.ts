@@ -30,22 +30,24 @@ export class BrandComponent implements OnInit {
   public id = 0;
   public brandData;
   public singleRecord: any[];
+  public pageDirection = 'reset';
+  public pageActive = 'reset';
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.fetchData(this.pageIndex, this.pageSize);
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
   }
 
-  fetchData(index: number, size: number) {
+  fetchData(index: number, size: number, direction: string, field: string) {
     const pageIndex = index * size;
-    this.brandService.getBrandPageWise(pageIndex, size)
+    this.brandService.getBrandPageWise(pageIndex, size, direction, field)
       .subscribe(
         (data: any) => {
             this.len = data['count'];
             this.brandData = data['rows'];
-            this.dataSource = new MatTableDataSource(data['rows']);
-            this.dataSource.sort = this.sort;
+            this.dataSource = data['rows'];
           // }
         },
         (error) => {
@@ -55,8 +57,15 @@ export class BrandComponent implements OnInit {
   }
 
   sortData(event: Sort) {
-    console.log(event.direction);
-    console.log(event.active);
+    this.pageDirection = event.direction;
+    this.pageActive = event.active;
+
+    if (this.pageDirection === '') {
+      this.pageDirection = 'reset';
+      this.pageActive = 'reset';
+    }
+
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
   }
 
   deleteBrand(id: number) {
@@ -71,7 +80,7 @@ export class BrandComponent implements OnInit {
         }
       );
     setTimeout(() => {
-      this.fetchData(this.pageIndex, this.pageSize);
+      this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
     }, 500);
   }
 
@@ -84,7 +93,7 @@ export class BrandComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
 
-    this.fetchData(this.pageIndex, this.pageSize);
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
   }
 
   openDialog() {
@@ -117,9 +126,9 @@ export class BrandComponent implements OnInit {
             });
 
             if (result.Status === 'Added Successfully') {
-              this.fetchData(this.pageIndex, this.pageSize);
+              this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
             } else if (result.Status === 'Updated succesfully') {
-              this.fetchData(this.pageIndex, this.pageSize);
+              this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
             }
           } else {
             console.log(result);

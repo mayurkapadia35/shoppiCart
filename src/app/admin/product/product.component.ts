@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatSnackBar, MatSort, MatTableDataSource, PageEvent} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar, MatSort, MatTableDataSource, PageEvent, Sort} from '@angular/material';
 import {ProductDialogComponent} from './product-dialog/product-dialog.component';
 import {ProductService} from '../../Services/product.service';
 
@@ -16,6 +16,9 @@ export class ProductComponent implements OnInit {
   public pageIndex = 0;
   public pageSize = 5;
   public len;
+  public pageDirective = 'reset';
+  public pageActive = 'reset';
+
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private dialog: MatDialog,
@@ -24,7 +27,26 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.fetchData(this.pageIndex, this.pageSize);
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirective, this.pageActive);
+  }
+
+  sortchange(event: Sort) {
+    this.pageDirective = event.direction;
+    this.pageActive = event.active;
+
+    if (this.pageDirective === '') {
+      this.pageDirective = 'reset';
+      this.pageActive = 'reset';
+    }
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirective, this.pageActive);
+
+  }
+
+  changePage(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirective, this.pageActive);
   }
 
   deleteProduct(id: number) {
@@ -43,25 +65,17 @@ export class ProductComponent implements OnInit {
       );
 
     setTimeout(() => {
-      this.fetchData(this.pageIndex, this.pageSize);
+      this.fetchData(this.pageIndex, this.pageSize, this.pageDirective, this.pageActive);
     }, 500);
   }
 
-  changePage(event: PageEvent) {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
-
-    this.fetchData(this.pageIndex, this.pageSize);
-  }
-
-  fetchData(index: number, size: number) {
+  fetchData(index: number, size: number, direction: string, field: string) {
     const pageIndex = index * size;
-    this.prodService.getPageWiseData(pageIndex, size)
+    this.prodService.getPageWiseData(pageIndex, size, direction, field)
       .subscribe(
         (result) => {
           this.len = result['count'];
-          this.dataSource = new MatTableDataSource(result['rows']);
-          this.dataSource.sort = this.sort;
+          this.dataSource = result['rows'];
         },
         (error) => {
           console.log(error);

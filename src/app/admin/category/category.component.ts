@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CategoryService} from '../../Services/category.service';
-import {MatSort, MatTableDataSource, PageEvent} from '@angular/material';
+import {MatSort, MatTableDataSource, PageEvent, Sort} from '@angular/material';
 
 @Component({
   selector: 'app-category',
@@ -16,19 +16,32 @@ export class CategoryComponent implements OnInit {
   public pageIndex = 0;
   public pageSize = 5;
   public len = 0;
+  public pageDirection = 'reset';
+  public pageActive = 'reset';
+
   ngOnInit() {
 
-    this.fetchData(this.pageIndex, this.pageSize);
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
   }
 
-  fetchData(index: number, size: number) {
+  sortData(event: Sort) {
+    this.pageDirection = event.direction;
+    this.pageActive = event.active;
+
+    if (this.pageDirection === '') {
+      this.pageDirection = 'reset' ;
+      this.pageActive = 'reset';
+    }
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
+  }
+
+  fetchData(index: number, size: number, direction: string, field: string) {
     const offset = index * size;
-    this.categoryService.getDataPageWise(offset, size)
+    this.categoryService.getDataPageWise(offset, size, direction, field)
       .subscribe(
         (result) => {
           this.len = result['count'];
-          this.dataSource = new MatTableDataSource(result['rows']);
-          this.dataSource.sort = this.sort;
+          this.dataSource = result['rows'];
         },
         (error) => {
           console.log(error);
@@ -39,7 +52,7 @@ export class CategoryComponent implements OnInit {
   changeData (event: PageEvent) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.fetchData(this.pageIndex, this.pageSize);
+    this.fetchData(this.pageIndex, this.pageSize, this.pageDirection, this.pageActive);
   }
 
 }

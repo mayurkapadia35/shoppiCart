@@ -9,7 +9,7 @@ export class CategoryService {
     return this.http.get('http://192.168.200.153:4040/api/category');
   }
 
-  getDataPageWise(index: number, size: number) {
-    return this.http.get('http://192.168.200.153:4040/api/category/' + index + '/' + size);
+  getDataPageWise(index: number, size: number, direction: string, field: string) {
+    return this.http.get('http://192.168.200.153:4040/api/category/' + index + '/' + size + '/' + direction + '/' + field);
   }
 }
