@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CategoryService} from '../../Services/category.service';
-import {MatSort, MatTableDataSource, PageEvent, Sort} from '@angular/material';
+import {MatSort, PageEvent, Sort} from '@angular/material';
 
 @Component({
   selector: 'app-category',

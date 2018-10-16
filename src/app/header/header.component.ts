@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialogConfig, MatDialog, MatMenuTrigger, MatSnackBar} from '@angular/material';
 import {SigninUpComponent} from '../signin-up/signin-up.component';
+import {AuthenticationService} from '../auth-guard/authentication-service';
+import {exitCodeFromResult} from '@angular/compiler-cli';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,27 @@ export class HeaderComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   constructor(public dialog: MatDialog,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private authService: AuthenticationService) {
+  }
+  public menuToggle = true;
+  ngOnInit() {
+    this.authService.isAdmin
+      .subscribe(
+        (result) => {
+          if (result === 'User') {
+            this.menuToggle = !this.menuToggle;
+          }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    this.authService.getUserRole_name();
   }
 
-  ngOnInit() {
+  logout() {
+    this.authService.logout();
   }
 
   openDialog() {

@@ -14,12 +14,12 @@
       </mat-grid-tile>
       <mat-grid-tile></mat-grid-tile>
 
-      <mat-grid-tile *ngIf="true">
+      <mat-grid-tile *ngIf="menuToggle">
         <button type="button" mat-button (click)="openDialog()">SignIn/SignUp</button>
       </mat-grid-tile>
 
       <!--Start the code for menu trigger-->
-      <mat-grid-tile *ngIf="false">
+      <mat-grid-tile *ngIf="!menuToggle">
         <mat-menu #appMenu="matMenu">
           <button mat-menu-item>
             <mat-icon>account_circle</mat-icon>
@@ -29,14 +29,14 @@
             <mat-icon>shopping_basket</mat-icon>
             Orders
           </button>
-          <button mat-menu-item>
+          <button mat-menu-item (click)="logout()">
             <mat-icon>logout</mat-icon>
             Logout
           </button>
         </mat-menu>
 
         <button mat-icon-button [matMenuTriggerFor]="appMenu" (mouseover)="openMenu()">
-          Admin
+          Hello User
           <mat-icon>keyboard_arrow_down</mat-icon>
         </button>
       </mat-grid-tile>

@@ -33,7 +33,5 @@ export class AdminDashboardComponent {
     })
   );
 
-  constructor(private breakpointObserver: BreakpointObserver,
-              private authService: AuthenticationService,
-              private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 }

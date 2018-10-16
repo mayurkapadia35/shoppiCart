@@ -2,23 +2,20 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
   isAdmin = new Subject<any>();
-  // userData: any;
   role = 'User';
   login(data) {
-    return this.http.post('http://192.168.200.153:4040/api/auth/login', data)
+    return this.http.post(environment.apiUrl + 'auth/login', data)
       .pipe(
         map(
           (response: any) => {
             localStorage.setItem('token', 'Bearer ' + response['token']);
             localStorage.setItem('user', JSON.stringify(response['user']));
-            // const base64url = response['token'].split('.')[1];
-            // const base64 = base64url.replace('-', '+').replace('_', '/');
-            // this.userData = JSON.parse(atob(base64));
             this.role = response['user'].role_name;
             this.isAdmin.next(this.role);
             return response;
@@ -28,7 +25,7 @@ export class AuthenticationService {
   }
 
   register(data) {
-    return this.http.post('http://192.168.200.153:4040/api/auth/register', data);
+    return this.http.post(environment.apiUrl + 'auth/register', data);
   }
 
   logout() {

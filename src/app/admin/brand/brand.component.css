@@ -2,3 +2,6 @@
   width: 80vh;
   margin: 2px auto;
 }
+.zindex_class {
+  z-index: 10;
+}

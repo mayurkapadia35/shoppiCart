@@ -1,24 +1,25 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class ProductService {
   constructor(private http: HttpClient) {}
 
   getPageWiseData(index: number, size: number, direction: string, field: string) {
-    return this.http.get('http://192.168.200.153:4040/api/product/' + index + '/' + size + '/' + direction + '/' + field);
+    return this.http.get(environment.apiUrl + 'product/' + index + '/' + size + '/' + direction + '/' + field);
   }
 
   deleteProduct(id: number) {
-    return this.http.delete('http://192.168.200.153:4040/api/product/' + id);
+    return this.http.delete(environment.apiUrl + 'product/' + id);
   }
 
   addProduct(prodData) {
-    return this.http.post('http://192.168.200.153:4040/api/product', prodData);
+    return this.http.post(environment.apiUrl + 'product', prodData);
   }
 
   editProduct(prodData, id: number) {
-    return this.http.put('http://192.168.200.153:4040/api/product/' + id, prodData);
+    return this.http.put(environment.apiUrl + 'product/' + id, prodData);
   }
 
 }

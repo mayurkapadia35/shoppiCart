@@ -4,7 +4,7 @@ import {AuthenticationService} from './authentication-service';
 import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-
+import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     const copiedReq = req.clone();
 
-    if (copiedReq.url.indexOf('http://192.168.200.153:4040/api/auth/') === -1) {
+    if (copiedReq.url.indexOf(environment.apiUrl + 'auth/') === -1) {
 
       const header = this.authService.getToken();
       const copy = req.clone({headers: req.headers.set('Authorization', header)});

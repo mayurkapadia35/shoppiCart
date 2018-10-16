@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {BrandService} from '../../../Services/brand.service';
 import {CategoryService} from '../../../Services/category.service';
 import {ProductService} from '../../../Services/product.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-product-dialog',
@@ -22,6 +23,7 @@ export class ProductDialogComponent implements OnInit {
   public output: any;
   public categoryData: any[];
   public files;
+  public imageUrl = environment.imageUrl;
   public id = 0;
   public isDeletedArray = [
     { name: '0 Not', value: 0},
@@ -79,7 +81,7 @@ export class ProductDialogComponent implements OnInit {
         issoldout: this.data.data.issoldout
       });
       const image = <HTMLInputElement>document.getElementById('profileid');
-      image.src = 'http://192.168.200.153:4040/images/' + this.data.data.product_images;
+      image.src = this.imageUrl + '/images/' + this.data.data.product_images;
     }
   }
 

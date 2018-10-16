@@ -53,11 +53,14 @@ export class SigninUpComponent implements OnInit {
               this.response = result;
               this.thisDialogRef.close(this.response);
               this.router.navigate(['/admin']);
+            } else {
+              this.thisDialogRef.close(this.response);
             }
           }
         },
         (error) => {
-          console.log(error);
+          // console.log(error);
+          alert(error.error.message);
         }
       );
   }

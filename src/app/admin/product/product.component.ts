@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatSnackBar, MatSort, MatTableDataSource, PageEvent, Sort} from '@angular/material';
 import {ProductDialogComponent} from './product-dialog/product-dialog.component';
 import {ProductService} from '../../Services/product.service';
-
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
   public pageSize = 5;
   public len;
   public id = 0;
+  public imageUrl = environment.imageUrl;
   public singleRecord: any[];
   public productData;
   public pageDirective = 'reset';

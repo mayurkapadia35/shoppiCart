@@ -5,7 +5,6 @@ import {
   MatPaginator,
   MatSnackBar,
   MatSort,
-  MatTableDataSource,
   PageEvent, Sort
 } from '@angular/material';
 import {BranddialogComponent} from './branddialog/branddialog.component';

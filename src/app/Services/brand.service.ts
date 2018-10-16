@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class BrandService {
   constructor(private http: HttpClient) {}
 
   addBrand(brandData) {
-    return this.http.post('http://192.168.200.153:4040/api/brand/', brandData)
+    return this.http.post(environment.apiUrl + 'brand/', brandData)
       .pipe(
         map(
           (response: Response) => {
@@ -18,7 +19,7 @@ export class BrandService {
   }
 
   editBrand(brandData, id: number) {
-    return this.http.put('http://192.168.200.153:4040/api/brand/' + id, brandData)
+    return this.http.put(environment.apiUrl + 'brand/' + id, brandData)
       .pipe(
         map(
           (response: Response) => {
@@ -29,15 +30,15 @@ export class BrandService {
   }
 
   getAllBrand() {
-    return this.http.get('http://192.168.200.153:4040/api/brand/');
+    return this.http.get(environment.apiUrl + 'brand/');
   }
 
   deleteBrand(id: number) {
-    return this.http.delete('http://192.168.200.153:4040/api/brand/' + id);
+    return this.http.delete(environment.apiUrl + 'brand/' + id);
   }
 
   getBrandPageWise(pageIndex: number, pageSize: number, direction: string, field: string) {
-    return this.http.get('http://192.168.200.153:4040/api/brand/' + pageIndex + '/' + pageSize + '/' + direction + '/' + field)
+    return this.http.get(environment.apiUrl + 'brand/' + pageIndex + '/' + pageSize + '/' + direction + '/' + field)
       .pipe(
         map(
           (response: Response) => {
