@@ -28,14 +28,14 @@ export class SigninUpComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required)
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(18)])
     });
 
     this.registerForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, Validators.required),
-      phone_no: new FormControl(null, [Validators.required, Validators.maxLength(10)])
+      password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(18)]),
+      phone_no: new FormControl(null, [Validators.required, Validators.pattern(/^\d{10}$/)])
     });
   }
 
@@ -93,6 +93,14 @@ export class SigninUpComponent implements OnInit {
     this.dialogFlag = 'Login';
     this.loginFlag = true;
     this.registerFlag = false;
+  }
+
+  clearLoginForm() {
+    this.loginForm.reset();
+  }
+
+  clearRegisterForm() {
+    this.registerForm.reset();
   }
 
 }

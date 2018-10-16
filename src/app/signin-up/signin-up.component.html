@@ -1,21 +1,25 @@
 <div>
-  <h2 mat-dialog-title>{{dialogFlag}} Dialog</h2>
+  <h2 mat-dialog-title>{{dialogFlag}} Dialog
+    <button mat-dialog-close style="float: right;" mat-mini-fab type="button"><mat-icon>close</mat-icon></button>
+  </h2>
   <div *ngIf="loginFlag">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-dialog-content>
         <mat-form-field style="width: 100%;">
           <input matInput formControlName="email" placeholder="Email"/>
+          <mat-error *ngIf="loginForm.get('email').errors">Please enter a valid Email address</mat-error>
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
           <input matInput formControlName="password" [type]="hideLogin ? 'text' : 'password'" placeholder="Password"/>
           <mat-icon matSuffix (click)="hideLogin = !hideLogin">{{hideLogin ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="loginForm.get('password').errors">Enter the password between 8 to 18</mat-error>
         </mat-form-field>
 
       </mat-dialog-content>
       <mat-dialog-actions>
         <button mat-stroked-button type="submit" [disabled]="!loginForm.valid" color="primary">Login</button>
-        <button mat-stroked-button type="button" mat-dialog-close>Cancel</button>
+        <button mat-stroked-button type="button" (click)="clearLoginForm()">Clear</button>
       </mat-dialog-actions>
     </form>
   </div>
@@ -25,21 +29,24 @@
       <mat-dialog-content>
         <mat-form-field style="width: 100%;">
           <input matInput formControlName="email" placeholder="Email"/>
+          <mat-error *ngIf="registerForm.get('email').errors">Please enter a valid Email address</mat-error>
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
           <input matInput formControlName="password" [type]="hideRegister ? 'text' : 'password'" placeholder="Password"/>
           <mat-icon matSuffix (click)="hideRegister = !hideRegister">{{hideRegister ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="registerForm.get('password').errors">Enter the password between 8 to 18</mat-error>
         </mat-form-field>
 
         <mat-form-field style="width: 100%;">
           <input matInput formControlName="phone_no" placeholder="Contact No"/>
+          <mat-error *ngIf="registerForm.get('phone_no').errors">Enter the valid Contact No of 10 digit.</mat-error>
         </mat-form-field>
 
       </mat-dialog-content>
       <mat-dialog-actions>
         <button mat-stroked-button type="submit" [disabled]="!registerForm.valid" color="primary">Register</button>
-        <button mat-stroked-button type="button" mat-dialog-close>Cancel</button>
+        <button mat-stroked-button type="button" (click)="clearRegisterForm()">Clear</button>
       </mat-dialog-actions>
     </form>
   </div>

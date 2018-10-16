@@ -14,42 +14,51 @@
         <mat-select formControlName="brand_id" placeholder="Select Brand">
           <mat-option [value]="brand.id" *ngFor="let brand of brandData">{{brand.brand_name}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="productForm.get('brand_id').errors">Please select a brand.</mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-select formControlName="category_id" placeholder="Select Category">
           <mat-option [value]="category.id" *ngFor="let category of categoryData">{{category.category_name}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="productForm.get('category_id').errors">Please select a Category.</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput formControlName="product_name" placeholder="Product Name">
+        <mat-error *ngIf="productForm.get('product_name').errors">Please enter a valid Product Name.</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <input matInput formControlName="product_description" placeholder="Product Description">
+        <mat-error *ngIf="productForm.get('product_description').errors">Please enter a valid Description.</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput formControlName="product_qty" type="number" placeholder="Product Quantity">
+        <mat-error *ngIf="productForm.get('product_qty').errors">Please enter a valid Quantity.</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput formControlName="product_price" placeholder="Product Price">
+        <mat-error *ngIf="productForm.get('product_price').errors">Please enter a valid Price.</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-select formControlName="isDeleted" placeholder="Select is Deleted">
           <mat-option [value]="data.value" *ngFor="let data of isDeletedArray">{{data.name}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="productForm.get('isDeleted').errors">Please select a is-Deleted Option.</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-select formControlName="issoldout" placeholder="Select Sold Out Option">
           <mat-option [value]="data.value" *ngFor="let data of isSoldOut">{{data.name}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="productForm.get('issoldout').errors">Please select a issoldout Option.</mat-error>
       </mat-form-field>
 
       <div>
         <input type="file" formControlName="product_images" id="profile" (change)="previewFile()"/>
+        <mat-error *ngIf="productForm.get('product_images').errors">Please select a File.</mat-error>
       </div>
       <div>
         <img src="" alt="" id="profileid" height="100px" width="100px">

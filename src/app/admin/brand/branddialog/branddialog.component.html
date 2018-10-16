@@ -10,6 +10,7 @@
     <mat-dialog-content>
       <mat-form-field>
         <input matInput formControlName="name" placeholder="Enter the Brand Name">
+        <mat-error *ngIf="brandForm.get('name').errors">Please enter a valid Brand Name</mat-error>
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions>

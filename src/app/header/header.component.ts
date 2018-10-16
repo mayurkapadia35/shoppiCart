@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialogConfig, MatDialog, MatMenuTrigger, MatSnackBar} from '@angular/material';
 import {SigninUpComponent} from '../signin-up/signin-up.component';
 import {AuthenticationService} from '../auth-guard/authentication-service';
-import {exitCodeFromResult} from '@angular/compiler-cli';
 
 @Component({
   selector: 'app-header',
