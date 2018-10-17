@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatSnackBar, MatSort, MatTableDataSource, PageEvent, Sort} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar, MatSort, PageEvent, Sort} from '@angular/material';
 import {ProductDialogComponent} from './product-dialog/product-dialog.component';
 import {ProductService} from '../../Services/product.service';
 import { environment } from '../../../environments/environment';
