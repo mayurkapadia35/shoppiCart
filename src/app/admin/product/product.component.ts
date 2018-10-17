@@ -10,7 +10,7 @@ import { environment } from '../../../environments/environment';
 })
 export class ProductComponent implements OnInit {
 
-  public displayedColumns: string[] = ['category_id', 'brand_id',
+  public displayedColumns: string[] = ['category_name', 'brand_name',
     'product_name', 'product_description', 'product_qty', 'product_price', 'product_images', 'isDeleted', 'issoldout', 'actions'];
   public dataSource;
   public pageIndex = 0;

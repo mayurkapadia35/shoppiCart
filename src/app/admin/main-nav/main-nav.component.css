@@ -21,3 +21,6 @@
   text-decoration: none;
   color: white;
 }
+.hideButton {
+  z-index: 1;
+}

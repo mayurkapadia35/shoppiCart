@@ -58,7 +58,6 @@
 
       <div>
         <input type="file" formControlName="product_images" id="profile" (change)="previewFile()"/>
-        <mat-error *ngIf="productForm.get('product_images').errors">Please select a File.</mat-error>
       </div>
       <div>
         <img src="" alt="" id="profileid" height="100px" width="100px">

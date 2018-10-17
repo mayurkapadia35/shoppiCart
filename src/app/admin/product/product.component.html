@@ -1,18 +1,18 @@
 <div>
-  <button mat-fab type="button" class="zindex_class" (click)="openDialog()"><mat-icon>add</mat-icon></button>
+  <button mat-fab type="button" (click)="openDialog()"><mat-icon>add</mat-icon></button>
 
   <table mat-table [dataSource]="dataSource" (matSortChange)="sortchange($event)" matSort class="mat-elevation-z8 data-table">
 
     <!-- Brand_name Column -->
-    <ng-container matColumnDef="category_id">
+    <ng-container matColumnDef="category_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-      <td mat-cell *matCellDef="let element"> {{element.category_id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.tblcategory.category_name}} </td>
     </ng-container>
 
     <!-- Brand_name Column -->
-    <ng-container matColumnDef="brand_id">
+    <ng-container matColumnDef="brand_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Brand </th>
-      <td mat-cell *matCellDef="let element"> {{element.brand_id}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.tblbrand.brand_name}} </td>
     </ng-container>
 
     <!-- Brand_name Column -->
