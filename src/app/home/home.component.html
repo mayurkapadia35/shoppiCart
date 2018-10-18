@@ -1,8 +1,26 @@
 <mat-grid-list cols="1" rowHeight="250px">
   <mat-grid-tile>
-    <img src="../images/1.jpg" alt="" height="150px" width="630">
+    <img [src]="'src/app/images/' + imageValue" height="100%" width="100%">
   </mat-grid-tile>
-  <!--<mat-grid-tile>grid-2</mat-grid-tile>-->
   <!--<mat-grid-tile>grid-3</mat-grid-tile>-->
   <!--<mat-grid-tile>grid-4</mat-grid-tile>-->
+</mat-grid-list>
+<mat-grid-list cols="3" rowHeight="380px">
+  <mat-grid-tile *ngFor="let data of randomData">
+    <mat-card class="example-card">
+      <img mat-card-image [src]="imageUrl+'/images/' + data.product_images" [alt]="data.product_images">
+      <mat-card-content>
+        <p class="display-enter">
+          {{data.product_name}}
+        </p>
+        <p>Rs.
+          {{data.product_price}}
+        </p>
+        <p>
+          {{data.tblcategory.category_name}}
+        </p>
+
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
 </mat-grid-list>

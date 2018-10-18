@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatButtonModule,
+  MatButtonModule, MatCardModule,
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
@@ -33,7 +33,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSelectModule,
     MatSortModule,
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCardModule
   ],
   exports: [
     MatButtonModule,
@@ -52,7 +53,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSelectModule,
     MatSortModule,
     MatTooltipModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCardModule
   ]
 })
 export class NgMaterialModule {
