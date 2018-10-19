@@ -24,15 +24,7 @@ export class ProductService {
   }
 
   getRandomData(value: string, limit: number) {
-    return this.http.get(environment.apiUrl + 'product/' + value + '/' + limit)
-      .pipe(
-        map(
-          (response: Response) => {
-            console.log(response);
-            return response;
-          }
-        )
-      );
+    return this.http.get(environment.apiUrl + 'product/' + value + '/' + limit);
   }
 
 }

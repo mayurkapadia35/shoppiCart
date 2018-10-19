@@ -1,8 +1,32 @@
 .example-card {
   max-width: 250px;
+  margin-top: 30px;
 }
-
+.example-card div img{
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}
+.example-card div{
+  height: 190px;
+}
 .display-enter {
   text-align: center;
   font-weight: bold;
+}
+.center-button {
+  text-align: center;
+}
+.mat-card-content{
+  margin: 0 auto;
+}
+.mat-card-content p{
+  text-align: center;
+  margin: 0;
+  line-height: 20px;
+}
+.mat-card-actions{
+  margin: 0 auto 15px;
+  width: 100%;
+  text-align: center;
 }

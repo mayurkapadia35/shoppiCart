@@ -5,16 +5,23 @@ import {Injectable} from '@angular/core';
 import {tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
   constructor(private authService: AuthenticationService,
-              private router: Router) {}
+              private router: Router) {
+  }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const copiedReq = req.clone();
 
     if (copiedReq.url.indexOf(environment.apiUrl + 'auth/') === -1) {
+
+      if (copiedReq.url.indexOf(environment.apiUrl + 'product/feature/6') === 0) {
+        return next.handle(copiedReq);
+      }
 
       const header = this.authService.getToken();
       const copy = req.clone({headers: req.headers.set('Authorization', header)});

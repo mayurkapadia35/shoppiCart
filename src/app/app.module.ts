@@ -16,6 +16,7 @@ import {CategoryService} from './Services/category.service';
 import { ProductDialogComponent } from './admin/product/product-dialog/product-dialog.component';
 import {AuthInterceptor} from './auth-guard/auth.interceptor';
 import {ProductService} from './Services/product.service';
+import {ImageZoomModule} from 'angular2-image-zoom';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ProductService} from './Services/product.service';
     NgMaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ImageZoomModule
   ],
   providers: [AuthenticationService, ProductService, BrandService, CategoryService, {
     provide: HTTP_INTERCEPTORS,

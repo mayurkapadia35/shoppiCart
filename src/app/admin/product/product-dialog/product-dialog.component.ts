@@ -35,6 +35,11 @@ export class ProductDialogComponent implements OnInit {
     { name: 'false', value: 'false'},
   ];
 
+  public isFeatureProduct = [
+    { name: '0', value: 0},
+    { name: '1', value: 1},
+  ];
+
   ngOnInit() {
     this.categoryService.getAllCategory()
       .subscribe(
@@ -65,7 +70,8 @@ export class ProductDialogComponent implements OnInit {
       product_price: new FormControl(null, Validators.required),
       isDeleted: new FormControl(0, Validators.required),
       issoldout: new FormControl('false', Validators.required),
-      product_images: new FormControl(null, Validators.required)
+      product_images: new FormControl(null, Validators.required),
+      isFeatureProduct: new FormControl(0, Validators.required)
     });
 
     if (!this.data.status) {
@@ -78,7 +84,8 @@ export class ProductDialogComponent implements OnInit {
         product_qty: this.data.data.product_qty,
         product_price: this.data.data.product_price,
         isDeleted: this.data.data.isDeleted,
-        issoldout: this.data.data.issoldout
+        issoldout: this.data.data.issoldout,
+        isFeatureProduct: this.data.data.isFeatureProduct
       });
       const image = <HTMLInputElement>document.getElementById('profileid');
       image.src = this.imageUrl + '/images/' + this.data.data.product_images;
@@ -118,6 +125,7 @@ export class ProductDialogComponent implements OnInit {
     fd.append('product_images', this.files);
     fd.append('isDeleted', this.productForm.get('isDeleted').value);
     fd.append('issoldout', this.productForm.get('issoldout').value);
+    fd.append('isFeatureProduct', this.productForm.get('isFeatureProduct').value);
 
     if (this.id > 0) {
       this.productService.editProduct(fd, this.id)

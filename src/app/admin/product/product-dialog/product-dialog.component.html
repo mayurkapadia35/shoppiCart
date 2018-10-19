@@ -56,6 +56,13 @@
         <mat-error *ngIf="productForm.get('issoldout').errors">Please select a issoldout Option.</mat-error>
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-select formControlName="isFeatureProduct" placeholder="Select is_feature_product option">
+          <mat-option [value]="data.value" *ngFor="let data of isFeatureProduct">{{data.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="productForm.get('isFeatureProduct').errors">Please select a is_feature_product Option.</mat-error>
+      </mat-form-field>
+
       <div>
         <input type="file" formControlName="product_images" id="profile" (change)="previewFile()"/>
       </div>

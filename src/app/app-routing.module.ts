@@ -21,6 +21,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { BranddialogComponent } from './admin/brand/branddialog/branddialog.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { ProductComponent } from './admin/product/product.component';
+import {ImageZoomModule} from 'angular2-image-zoom';
+import { ProductInfoComponent } from './product-info/product-info.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -30,6 +32,7 @@ const appRoutes: Routes = [
       {path: 'category', component: CategoryComponent},
       {path: 'product', component: ProductComponent}
     ]},
+  {path: 'product/:id', component: ProductInfoComponent},
   {path: 'not-found', component: PagenotfoundComponent},
   {path: '**', redirectTo: '/not-found'}
 ];
@@ -44,7 +47,8 @@ const appRoutes: Routes = [
     BrandComponent,
     BranddialogComponent,
     CategoryComponent,
-    ProductComponent
+    ProductComponent,
+    ProductInfoComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -61,7 +65,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ImageZoomModule
   ],
   exports: [RouterModule],
   providers: [AdminAuthGuard]
