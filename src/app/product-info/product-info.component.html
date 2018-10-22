@@ -1,4 +1,19 @@
-<p>
-  product-info works!
-  {{user}}
-</p>
+<mat-grid-list cols="2" rowHeight="400px">
+  <mat-grid-tile class="image-left">
+    <img [src]="imageUrl + '/images/' + image" alt="" width="50%" height="80%">
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+    <mat-list>
+      <mat-list-item class="mat-body-2">{{productName}}</mat-list-item>
+      <mat-list-item>&#x20B9;{{price}}</mat-list-item>
+      <mat-list-item>Category: {{category}}</mat-list-item>
+      <mat-list-item>Brand: {{brand}}</mat-list-item>
+      <mat-list-item class="hurryup">Hurry up only: {{Qty}} left</mat-list-item>
+      <mat-list-item>
+        <button mat-stroked-button type="button">Add to cart</button>
+        <button mat-stroked-button type="button">Buy Now</button>
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+</mat-grid-list>

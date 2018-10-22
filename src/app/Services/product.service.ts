@@ -27,4 +27,8 @@ export class ProductService {
     return this.http.get(environment.apiUrl + 'product/' + value + '/' + limit);
   }
 
+  getProductById(id: number) {
+    return this.http.get(environment.apiUrl + 'product/' + id);
+  }
+
 }

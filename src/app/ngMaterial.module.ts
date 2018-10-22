@@ -6,7 +6,7 @@ import {
   MatDividerModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatMenuModule,
   MatPaginatorModule, MatRadioModule, MatSelectModule,
   MatSnackBarModule, MatSortModule,
@@ -34,7 +34,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSortModule,
     MatTooltipModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule
   ],
   exports: [
     MatButtonModule,
@@ -54,7 +55,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSortModule,
     MatTooltipModule,
     MatRadioModule,
-    MatCardModule
+    MatCardModule,
+    MatListModule
   ]
 })
 export class NgMaterialModule {

@@ -18,6 +18,11 @@ export class AuthInterceptor implements HttpInterceptor {
     const copiedReq = req.clone();
 
     if (copiedReq.url.indexOf(environment.apiUrl + 'auth/') === -1) {
+      const data = req.url.split('/');
+
+      if (copiedReq.url.indexOf(environment.apiUrl + 'product/' + data[5]) === 0) {
+        return next.handle(copiedReq);
+      }
 
       if (copiedReq.url.indexOf(environment.apiUrl + 'product/feature/6') === 0) {
         return next.handle(copiedReq);

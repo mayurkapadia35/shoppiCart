@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   }
 
   public imageValue = '1.jpg';
-  public imageArray = ['1.jpg', '2.jpg', '3.png', '4.png'];
+  public imageArray = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
   public len = this.imageArray.length;
   public i = 1;
   private value = 'feature';
