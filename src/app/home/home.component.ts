@@ -47,6 +47,6 @@ export class HomeComponent implements OnInit {
       }
       this.imageValue = this.imageArray[this.i];
       this.i += 1;
-    }, 2000);
+    }, 2500);
   }
 }

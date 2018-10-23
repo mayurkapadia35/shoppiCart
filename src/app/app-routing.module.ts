@@ -23,6 +23,7 @@ import { CategoryComponent } from './admin/category/category.component';
 import { ProductComponent } from './admin/product/product.component';
 import {ImageZoomModule} from 'angular2-image-zoom';
 import { ProductInfoComponent } from './product-info/product-info.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
     ]},
   {path: 'product/:id', component: ProductInfoComponent},
   {path: 'not-found', component: PagenotfoundComponent},
+  {path: 'shopping_cart', component: ShoppingCartComponent},
   {path: '**', redirectTo: '/not-found'}
 ];
 
@@ -48,7 +50,8 @@ const appRoutes: Routes = [
     BranddialogComponent,
     CategoryComponent,
     ProductComponent,
-    ProductInfoComponent
+    ProductInfoComponent,
+    ShoppingCartComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialogConfig, MatDialog, MatMenuTrigger, MatSnackBar} from '@angular/material';
 import {SigninUpComponent} from '../signin-up/signin-up.component';
 import {AuthenticationService} from '../auth-guard/authentication-service';
+import {AddToCartService} from '../Services/addToCart.service';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +14,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private snackBar: MatSnackBar,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private addtocartService: AddToCartService) {
   }
   public menuToggle = true;
+  addToCartFlag: boolean;
+  badgeLength: number;
   ngOnInit() {
     this.authService.isAdmin
       .subscribe(
@@ -29,6 +33,23 @@ export class HeaderComponent implements OnInit {
         }
       );
     this.authService.getUserRole_name();
+
+    this.addtocartService.productLength
+      .subscribe(
+        (data) => {
+          if (data > 0) {
+              this.addToCartFlag = false;
+              this.badgeLength = data;
+          } else {
+              this.addToCartFlag = true;
+            }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+
+    this.addtocartService.getTotalCartProduct();
   }
 
   logout() {

@@ -44,8 +44,11 @@
       <!--EOL for Menu trigger code -->
 
       <mat-grid-tile>
-        <a mat-button routerLink="">
-          <mat-icon>shopping_cart</mat-icon>
+        <a mat-button routerLink="/shopping_cart">
+          <mat-icon matBadge="{{badgeLength}}"
+                    matBadgePosition="above before"
+                    matBadgeColor="accent"
+                    [matBadgeHidden]="addToCartFlag">shopping_cart</mat-icon>
           Cart</a>
       </mat-grid-tile>
     </mat-grid-tile-header>

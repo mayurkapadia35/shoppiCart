@@ -17,6 +17,7 @@ import { ProductDialogComponent } from './admin/product/product-dialog/product-d
 import {AuthInterceptor} from './auth-guard/auth.interceptor';
 import {ProductService} from './Services/product.service';
 import {ImageZoomModule} from 'angular2-image-zoom';
+import {AddToCartService} from './Services/addToCart.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import {ImageZoomModule} from 'angular2-image-zoom';
     HttpClientModule,
     ImageZoomModule
   ],
-  providers: [AuthenticationService, ProductService, BrandService, CategoryService, {
+  providers: [AuthenticationService, ProductService, BrandService, CategoryService, AddToCartService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

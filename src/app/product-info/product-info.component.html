@@ -11,7 +11,8 @@
       <mat-list-item>Brand: {{brand}}</mat-list-item>
       <mat-list-item class="hurryup">Hurry up only: {{Qty}} left</mat-list-item>
       <mat-list-item>
-        <button mat-stroked-button type="button">Add to cart</button>
+        <button mat-stroked-button type="button" *ngIf="!buttonFlag" (click)="AddToCart()">Add to cart</button>
+        <button mat-stroked-button type="button" *ngIf="buttonFlag" (click)="goToCart()">Go to cart</button>
         <button mat-stroked-button type="button">Buy Now</button>
       </mat-list-item>
     </mat-list>
