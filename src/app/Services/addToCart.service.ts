@@ -3,15 +3,17 @@ import {Subject} from 'rxjs';
 export class AddToCartService {
   private productArray = [];
   productLength = new Subject<any>();
+  cartTotalPrice = new Subject<any>();
+  cartProduct = new Subject<any>();
+  constructor() {
+  }
 
-  constructor() {}
-
-  setProductInCart(product: any[]) {
+  setProductInCart(product: any) {
     if (localStorage.getItem('products')) {
       this.productArray = JSON.parse(localStorage.getItem('products'));
-      this.productArray.push(product);
+      this.productArray.push({...product, product_qty: 1 });
     } else {
-      this.productArray.push(product);
+      this.productArray.push({...product, product_qty: 1 });
     }
     localStorage.setItem('products', JSON.stringify(this.productArray));
   }
@@ -28,7 +30,19 @@ export class AddToCartService {
   getAllCartProduct() {
     if (localStorage.getItem('products')) {
       const data = JSON.parse(localStorage.getItem('products'));
-      return data;
+      this.cartProduct.next(data);
+    }
+  }
+
+  getTotalPrice() {
+    if (localStorage.getItem('products')) {
+      const data = JSON.parse(localStorage.getItem('products'));
+      let price = 0;
+      data.map((v) => {
+        price = price + v.product_price;
+      });
+
+      this.cartTotalPrice.next(price);
     }
   }
 
@@ -42,6 +56,14 @@ export class AddToCartService {
         return false;
       }
     }
+  }
+
+  removeAndSetProductInCart(product: any[]) {
+    localStorage.removeItem('products');
+    localStorage.setItem('products', JSON.stringify(product));
+    this.getTotalCartProduct();
+    this.getAllCartProduct();
+    this.getTotalPrice();
   }
 
 }

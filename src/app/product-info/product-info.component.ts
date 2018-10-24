@@ -58,6 +58,7 @@ export class ProductInfoComponent implements OnInit {
     this.addtocartService.setProductInCart(this.product);
     this.addtocartService.getTotalCartProduct();
     this.buttonFlag = this.addtocartService.isProductInCart(this.prod_id);
+    this.addtocartService.getTotalPrice();
     if (this.buttonFlag === true) {
       this.router.navigate(['shopping_cart']);
     }

@@ -1,0 +1,40 @@
+<mat-card class="card-class">
+  <mat-card-header>
+    <mat-card-title>
+      PRICE DETAILS
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <div class="upper-totalprice">
+      <div class="totalPrice">
+        Price ({{length}} item)
+        <span>
+                &#x20B9;{{totalprice}}
+              </span>
+      </div>
+    </div>
+    <div class="upper-totalprice">
+      <div class="totalPrice">
+        Delivery Charges
+        <span>
+                &#x20B9;{{deliveryCharge}}
+              </span>
+      </div>
+      <div class="totalPrice">
+        <span class="free-charge">
+          Free delivery only above &#x20B9;500.
+        </span>
+      </div>
+    </div>
+    <mat-divider class="upper-totalprice"></mat-divider>
+    <div class="amount-payable">
+      <div class="totalPrice">
+        Amount Payable
+        <span>
+                &#x20B9;{{totalPayable}}
+              </span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

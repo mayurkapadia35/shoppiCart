@@ -1,0 +1,73 @@
+<div *ngIf="flag">
+  <mat-grid-list cols="3" rowHeight="600px">
+
+    <!--Shopping Cart section Start-->
+    <mat-grid-tile [colspan]="2">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>MY CART {{length}}</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+
+        <mat-card-content *ngFor="let data of cartProduct">
+          <div style="display: inline-block">
+            <span>
+              <img [src]="imageUrl + '/images/' + data.product_images" height="15%" width="15%">
+            </span>
+            <span>
+              {{data.product_name}}
+            </span>
+            <span>
+              &#x20B9;{{data.product_price}}
+            </span>
+            <span>
+              <button mat-mini-fab color="">-</button>
+                <mat-form-field>
+                  <input matInput value="1" type="text">
+                </mat-form-field>
+              <button mat-mini-fab color="">+</button>
+            </span>
+            <span>
+              <a style="cursor: pointer;" (click)="removeItem(data.id)" mat-button>Remove</a>
+            </span>
+          </div>
+        </mat-card-content>
+        <mat-divider></mat-divider>
+        <mat-card-actions class="buttons">
+          <button mat-stroked-button color="accent" routerLink="/">Continue Shopping</button>
+          <button mat-stroked-button color="accent">Place an Order</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+    <!--Shopping Cart section End-->
+
+    <!--Total Amount section Start-->
+    <mat-grid-tile [colspan]="1">
+      <div>
+        <app-price-detail></app-price-detail>
+      </div>
+    </mat-grid-tile>
+    <!--Total Amount section End-->
+
+  </mat-grid-list>
+</div>
+<div *ngIf="!flag">
+  <mat-grid-list cols="1" rowHeight="500px">
+    <mat-card>
+      <mat-card-header>
+        MY CART ({{length}})
+      </mat-card-header>
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <div class="center-image-cart">
+          <img src="src/app/images/cart.png" class="empty-cart-image" width="20%" height="20%">
+        </div>
+      </mat-card-content>
+      <div class="center-image-cart">
+        Your Shopping Cart is an Empty....
+      </div>
+    </mat-card>
+  </mat-grid-list>
+</div>

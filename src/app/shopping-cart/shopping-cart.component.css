@@ -1,0 +1,17 @@
+.example-card {
+  max-width: 90%;
+}
+
+.buttons {
+  float: right;
+}
+
+.empty-cart-image {
+  margin: auto;
+  padding: 10px;
+}
+
+.center-image-cart {
+  text-align: center;
+}
+

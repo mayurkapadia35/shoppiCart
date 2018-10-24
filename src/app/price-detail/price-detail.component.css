@@ -1,0 +1,23 @@
+.card-class {
+  height: 25%;
+  width: 100%;
+}
+
+.free-charge {
+  color: red;
+}
+
+.totalPrice {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.upper-totalprice {
+  margin-top: 4% !important;
+}
+
+.amount-payable {
+  margin-top: 8% !important;
+}
+
