@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AddToCartService} from '../Services/addToCart.service';
 
 @Component({
@@ -10,21 +10,11 @@ export class PriceDetailComponent implements OnInit {
 
   constructor(private addtocartService: AddToCartService) { }
 
-  length: number;
   totalprice: number;
   deliveryCharge: number;
   totalPayable: number;
+  @Input() length: string;
   ngOnInit() {
-    this.addtocartService.cartProduct
-      .subscribe(
-        (result) => {
-          const data = result;
-          this.length = data.length;
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
 
     this.addtocartService.cartTotalPrice
       .subscribe(
@@ -43,7 +33,6 @@ export class PriceDetailComponent implements OnInit {
           console.log(error);
         }
       );
-    this.addtocartService.getAllCartProduct();
     this.addtocartService.getTotalPrice();
   }
 

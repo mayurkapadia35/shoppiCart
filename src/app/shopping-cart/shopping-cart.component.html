@@ -10,26 +10,36 @@
         </mat-card-header>
         <mat-divider></mat-divider>
 
-        <mat-card-content *ngFor="let data of cartProduct">
+        <mat-card-content *ngFor="let qtyControl of qtyForm.get('quantity')['controls'];let i = index">
           <div style="display: inline-block">
             <span>
-              <img [src]="imageUrl + '/images/' + data.product_images" height="15%" width="15%">
+              <img [src]="imageUrl + '/images/' + cartProduct[i].product_images" height="15%" width="15%">
             </span>
             <span>
-              {{data.product_name}}
+              {{cartProduct[i].product_name}}
             </span>
             <span>
-              &#x20B9;{{data.product_price}}
+              &#x20B9;{{cartProduct[i].product_price}}
             </span>
-            <span>
-              <button mat-mini-fab color="">-</button>
-                <mat-form-field>
-                  <input matInput value="1" type="text">
+            <form [formGroup]="qtyForm" (ngSubmit)="save(i)">
+              <span formArrayName="quantity">
+              <button mat-mini-fab color="" type="submit">-</button>
+                <span>
+                <mat-form-field appearance="outline">
+                  <input matInput
+                         [name]="i"
+                         [formControlName]="i"
+                         placeholder="Quantity"
+                         (blur)="checkQty(i)"
+                         (keyup)="keyupQty(i)"
+                         type="number">
                 </mat-form-field>
-              <button mat-mini-fab color="">+</button>
-            </span>
+                  </span>
+                <button mat-mini-fab color="" type="submit">+</button>
+                </span>
+            </form>
             <span>
-              <a style="cursor: pointer;" (click)="removeItem(data.id)" mat-button>Remove</a>
+              <a style="cursor: pointer;" (click)="removeItem(cartProduct[i].id)" mat-button>Remove</a>
             </span>
           </div>
         </mat-card-content>
@@ -45,7 +55,7 @@
     <!--Total Amount section Start-->
     <mat-grid-tile [colspan]="1">
       <div>
-        <app-price-detail></app-price-detail>
+        <app-price-detail [length]="length"></app-price-detail>
       </div>
     </mat-grid-tile>
     <!--Total Amount section End-->

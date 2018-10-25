@@ -17,7 +17,7 @@ import {AdminAuthGuard} from './auth-guard/adminAuth.guard';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { BrandComponent } from './admin/brand/brand.component';
 import {MainNavComponent} from './admin/main-nav/main-nav.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BranddialogComponent } from './admin/brand/branddialog/branddialog.component';
 import { CategoryComponent } from './admin/category/category.component';
 import { ProductComponent } from './admin/product/product.component';
@@ -71,7 +71,8 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    ImageZoomModule
+    ImageZoomModule,
+    FormsModule
   ],
   exports: [RouterModule],
   providers: [AdminAuthGuard]
