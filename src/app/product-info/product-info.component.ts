@@ -27,7 +27,6 @@ export class ProductInfoComponent implements OnInit {
   private product;
   public buttonFlag = false;
   public imageUrl = environment.imageUrl;
-  private productArray = [];
 
   ngOnInit() {
     this.route.params

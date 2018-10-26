@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AddToCartService} from '../Services/addToCart.service';
 import {environment} from '../../environments/environment';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {ProductService} from '../Services/product.service';
+import {ProductQuantityService} from '../Services/product-quantity.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -10,14 +12,15 @@ import {FormArray, FormControl, FormGroup} from '@angular/forms';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor(private addtocartService: AddToCartService) {
+  constructor(private addtocartService: AddToCartService,
+              private productService: ProductService,
+              private productQuantityService: ProductQuantityService) {
   }
 
   cartProduct: any[];
   public imageUrl = environment.imageUrl;
   flag = false;
   public length: number;
-  public qtyInput = 1;
 
   qtyForm: FormGroup;
 
@@ -33,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
             this.cartProduct = result;
             this.length = this.cartProduct.length;
             result.forEach((product) => {
-              const control = new FormControl(product.product_qty);
+              const control = new FormControl(1);
               (<FormArray>this.qtyForm.get('quantity')).push(control);
             });
           } else {
@@ -48,23 +51,24 @@ export class ShoppingCartComponent implements OnInit {
     this.addtocartService.getAllCartProduct();
   }
 
-  save(id: number) {
-    console.log('individul id' + this.qtyForm.value.quantity[id]);
+  keyupQty(index: number, originalQuantity: number, category: string) {
+    const textBoxValue = +this.qtyForm.controls['quantity'].value[index];
+    const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
+    this.qtyForm.controls['quantity'].value[index] = updatedValue;
   }
 
-  checkQty(id: number) {
-    if (this.qtyForm.value.quantity[id] === null) {
-      this.qtyForm.value.forEach((part, index, theArray) => {
-        index = 1;
-      });
-    }
+  addQty(index: number, originalQuantity: number, category: string) {
+    this.qtyForm.controls['quantity'].value[index]++;
+    const textBoxValue = +this.qtyForm.controls['quantity'].value[index];
+    const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
+    this.qtyForm.controls['quantity'].value[index] = updatedValue;
   }
 
-  keyupQty(id: number) {
-    if (this.qtyForm.value.quantity[id] > 2) {
-
-      this.qtyForm.controls.quantity[id].value = 2;
-    }
+  removeQty(index: number, originalQuantity: number, category: string) {
+    this.qtyForm.controls['quantity'].value[index]--;
+    const textBoxValue = +this.qtyForm.controls['quantity'].value[index];
+    const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
+    this.qtyForm.controls['quantity'].value[index] = updatedValue;
   }
 
   removeItem(id: number) {

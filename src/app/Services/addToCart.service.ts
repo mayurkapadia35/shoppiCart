@@ -11,9 +11,9 @@ export class AddToCartService {
   setProductInCart(product: any) {
     if (localStorage.getItem('products')) {
       this.productArray = JSON.parse(localStorage.getItem('products'));
-      this.productArray.push({...product, product_qty: 1 });
+      this.productArray.push(product);
     } else {
-      this.productArray.push({...product, product_qty: 1 });
+      this.productArray.push(product);
     }
     localStorage.setItem('products', JSON.stringify(this.productArray));
   }

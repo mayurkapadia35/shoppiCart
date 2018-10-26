@@ -21,21 +21,21 @@
             <span>
               &#x20B9;{{cartProduct[i].product_price}}
             </span>
-            <form [formGroup]="qtyForm" (ngSubmit)="save(i)">
+            <form [formGroup]="qtyForm">
               <span formArrayName="quantity">
-              <button mat-mini-fab color="" type="submit">-</button>
+              <button mat-mini-fab color="" type="submit" [disabled]="qtyForm.controls['quantity'].value[i] === 1" (click)="removeQty(i, cartProduct[i].product_qty, cartProduct[i].tblcategory.category_name)">-</button>
                 <span>
                 <mat-form-field appearance="outline">
                   <input matInput
                          [name]="i"
                          [formControlName]="i"
+                         [(ngModel)]="qtyForm.controls['quantity'].value[i]"
                          placeholder="Quantity"
-                         (blur)="checkQty(i)"
-                         (keyup)="keyupQty(i)"
-                         type="number">
+                         (keyup)="keyupQty(i, cartProduct[i].product_qty, cartProduct[i].tblcategory.category_name)"
+                         type="text">
                 </mat-form-field>
                   </span>
-                <button mat-mini-fab color="" type="submit">+</button>
+                <button mat-mini-fab color="" type="submit" (click)="addQty(i, cartProduct[i].product_qty, cartProduct[i].tblcategory.category_name)">+</button>
                 </span>
             </form>
             <span>
