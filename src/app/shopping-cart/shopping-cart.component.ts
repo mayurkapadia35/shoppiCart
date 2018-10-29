@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AddToCartService} from '../Services/addToCart.service';
 import {environment} from '../../environments/environment';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ProductService} from '../Services/product.service';
 import {ProductQuantityService} from '../Services/product-quantity.service';
 
@@ -36,7 +36,7 @@ export class ShoppingCartComponent implements OnInit {
             this.cartProduct = result;
             this.length = this.cartProduct.length;
             result.forEach((product) => {
-              const control = new FormControl(1);
+              const control = new FormControl(1, [Validators.required, Validators.pattern(/^[0-9]*$/)]);
               (<FormArray>this.qtyForm.get('quantity')).push(control);
             });
           } else {
@@ -52,23 +52,25 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   keyupQty(index: number, originalQuantity: number, category: string) {
-    const textBoxValue = +this.qtyForm.controls['quantity'].value[index];
-    const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
-    this.qtyForm.controls['quantity'].value[index] = updatedValue;
+    this.manageQuantity(index, originalQuantity, category);
   }
 
   addQty(index: number, originalQuantity: number, category: string) {
     this.qtyForm.controls['quantity'].value[index]++;
-    const textBoxValue = +this.qtyForm.controls['quantity'].value[index];
-    const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
-    this.qtyForm.controls['quantity'].value[index] = updatedValue;
+    this.manageQuantity(index, originalQuantity, category);
   }
 
   removeQty(index: number, originalQuantity: number, category: string) {
     this.qtyForm.controls['quantity'].value[index]--;
+    this.manageQuantity(index, originalQuantity, category);
+  }
+
+  manageQuantity(index: number, originalQuantity: number, category: string) {
     const textBoxValue = +this.qtyForm.controls['quantity'].value[index];
-    const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
-    this.qtyForm.controls['quantity'].value[index] = updatedValue;
+    setTimeout(() => {
+      const updatedValue = this.productQuantityService.checkQuantity(textBoxValue, +originalQuantity, category);
+      this.qtyForm.controls['quantity'].value[index] = updatedValue;
+    }, 100);
   }
 
   removeItem(id: number) {

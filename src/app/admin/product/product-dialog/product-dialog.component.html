@@ -38,7 +38,7 @@
         <mat-error *ngIf="productForm.get('product_qty').errors">Please enter a valid Quantity.</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput formControlName="product_price" placeholder="Product Price">
+        <input matInput formControlName="product_price" placeholder="Product Price" type="number">
         <mat-error *ngIf="productForm.get('product_price').errors">Please enter a valid Price.</mat-error>
       </mat-form-field>
 
